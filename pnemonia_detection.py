@@ -26,7 +26,7 @@ import random
 #%%
 DATADIR = "/home/muzuri/Documents/My_final_Project/archive/chest_xray/train"
 
-CATEGORIES = ["chest_covid", "chest_nocovid"]
+CATEGORIES = ["PNEUMONIA", "NORMAL"]
 
 training_data = []
 
