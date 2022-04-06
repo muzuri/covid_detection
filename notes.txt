@@ -1,0 +1,17 @@
+Low-Pass Filtering (Blurring)
+The most basic of filtering operations is called "low-pass". 
+A low-pass filter, also called a "blurring" or "smoothing" filter, averages out rapid changes in intensity. 
+The simplest low-pass filter just calculates the average of a pixel and all of its eight immediate neighbors. 
+The result replaces the original value of the pixel. 
+The process is repeated for every pixel in the image.
+
+What are the features/clues/Artifacts that are used to distinguish Normal and Abnormal
+======================================================================================
+1. Consolidation : Ill/BAd defined opacity.
+2. Positive Silhouette Sign(Inability to differentiate closed Structures).
+e.g: heart and lung having almost the same density i.e contrast is very low.
+3. Lungs having the same density with abdominal organs.
+4. Air bronchogram in normal state should not be visible Through the lungs but with pneumonia you can see it.
+5. Pteural effusion : Liguid is Lungs Cavity. Normally there are no liquid in lungs.
+6. Not seeing Lungs edges , Normal edges should be clear and sharp.
+7. Abscess: Mass(space occupying region) or cavitations.

@@ -11,10 +11,12 @@
 # Assuming that Covid+ introduced the image texture modifications. LBP will help to capture texture information
 
 # 4. LBP histogram is used as feature vector on classifiers(SVM, LDA, KNN, LR, DTree, NBayes)
+
 #%%
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+#%%
 import cv2
 from tqdm import tqdm
 from skimage.feature import local_binary_pattern
@@ -24,9 +26,9 @@ import skimage.measure
 import random
 
 #%%
-DATADIR = "/home/muzuri/Documents/My_final_Project/archive/chest_xray/train"
+DATADIR = "/home/muzuri/Documents/My_final_Project/archive/chest_xray/chest_xray/train"
 
-CATEGORIES = ["chest_covid", "chest_nocovid"]
+CATEGORIES = ["PNEUMONIA", "NORMAL"]
 
 training_data = []
 
