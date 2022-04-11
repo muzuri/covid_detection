@@ -26,9 +26,9 @@ import skimage.measure
 import random
 
 #%%
-DATADIR = "/home/muzuri/Documents/My_final_Project/archive/chest_xray/chest_xray/train"
+DATADIR = "/media/patrick/E8DCFF67DCFF2E86/COVID_19_Kaggle/COVID-19_Radiography_Dataset/"
 
-CATEGORIES = ["PNEUMONIA", "NORMAL"]
+CATEGORIES = ["COVID", "Normal"]
 
 training_data = []
 
@@ -50,10 +50,11 @@ def create_training_data():
                 t = 0.05 #a small positive number used to avoid being divided by zero 
                 im = Image.fromarray(yi)
                 # applying the max filter 
-                maxv = im.filter(ImageFilter.MaxFilter(size = 9)) 
+                #maxv = im.filter(ImageFilter.MaxFilter(size = 9)) 
                 # applying the min filter 
-                minv = maxv.filter(ImageFilter.MinFilter(size = 9))
-                im_max = np.array(minv, dtype='float32')
+                #minv = maxv.filter(ImageFilter.MinFilter(size = 9))
+                median_f = im.filter(ImageFilter.MedianFilter(size = 9)) 
+                im_max = np.array(median_f, dtype='float32')
                 L = a*(im_max+t)
                 ill = np.array(L, dtype='uint8')#illumination estimation
                 #LBP of Ill
@@ -106,6 +107,7 @@ for features,label in training_data:
 print('feature vector size :',len(fx[0]))
 #%%
 feature_matrix = np.array(fx)
+np.save('feat.npy', feature_matrix)
 feature_matrix.shape
 #%%
 #set the test_size. Here is 0.2
@@ -230,4 +232,4 @@ plt.ylabel('True Positive Rate')
 plt.xlabel('False Positive Rate')
 plt.show()
 
-#fig.savefig('covid.png')
+fig.savefig('covid.png')

@@ -1,0 +1,26 @@
+#COVID vs Normal
+3616 vs 10192 images
+
+feature vector size : 768
+Training Duration: 0:01:47.061453
+Prediction Duration: 0:00:04.791369
+LogisticRegression Model accuracy is:  0.8023171614771905
+Tree Model accuracy is:  0.8475742215785662
+KNN Model accuracy is:  0.8580738595220855
+LDA Model accuracy is:  0.8598841419261405
+NBayes Model accuracy is:  0.7291817523533671
+SVM Model accuracy is:  0.782041998551774
+
+
+
+#RESULTS USING MEDIAN FILTERS (Remoded max - min filters
+feature vector size : 768
+Training Duration: 0:01:55.054986
+Prediction Duration: 0:00:05.103173
+LogisticRegression Model accuracy is:  0.7853005068790732
+Tree Model accuracy is:  0.8305575669804489
+KNN Model accuracy is:  0.8598841419261405
+LDA Model accuracy is:  0.8262128892107169
+NBayes Model accuracy is:  0.7052860246198407
+SVM Model accuracy is:  0.7726285300506879
+
