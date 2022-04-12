@@ -48,13 +48,14 @@ def create_training_data():
                 yi,cr,cb = cv2.split(image)
                 a= 1.1 #where a is a constant slightly larger than 1, used to avoid the resulting image being too bright
                 t = 0.05 #a small positive number used to avoid being divided by zero 
-                im = Image.fromarray(yi)
+                #im = Image.fromarray(yi)
                 # applying the max filter 
                 #maxv = im.filter(ImageFilter.MaxFilter(size = 9)) 
                 # applying the min filter 
                 #minv = maxv.filter(ImageFilter.MinFilter(size = 9))
-                median_f = im.filter(ImageFilter.MedianFilter(size = 9)) 
-                im_max = np.array(median_f, dtype='float32')
+                #median_f = im.filter(ImageFilter.MedianFilter(size = 9))
+                blur = cv2.bilateralFilter(yi,9,75,75) 
+                im_max = np.array(blur, dtype='float32')
                 L = a*(im_max+t)
                 ill = np.array(L, dtype='uint8')#illumination estimation
                 #LBP of Ill
