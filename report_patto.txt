@@ -1,6 +1,10 @@
 #COVID vs Normal
 3616 vs 10192 images
 
+
+
+#Results using max - min filter
+
 feature vector size : 768
 Training Duration: 0:01:47.061453
 Prediction Duration: 0:00:04.791369
@@ -14,6 +18,7 @@ SVM Model accuracy is:  0.782041998551774
 
 
 #RESULTS USING MEDIAN FILTERS (Remoded max - min filters
+
 feature vector size : 768
 Training Duration: 0:01:55.054986
 Prediction Duration: 0:00:05.103173
@@ -23,4 +28,16 @@ KNN Model accuracy is:  0.8598841419261405
 LDA Model accuracy is:  0.8262128892107169
 NBayes Model accuracy is:  0.7052860246198407
 SVM Model accuracy is:  0.7726285300506879
+
+
+#results using bilateral filter
+
+Training Duration: 0:01:50.050742
+Prediction Duration: 0:00:05.097198
+LogisticRegression Model accuracy is:  0.776249094858798
+Tree Model accuracy is:  0.8102824040550326
+KNN Model accuracy is:  0.8316437364228819
+LDA Model accuracy is:  0.8182476466328747
+NBayes Model accuracy is:  0.720130340333092
+SVM Model accuracy is:  0.7740767559739319
 
