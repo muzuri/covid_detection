@@ -41,3 +41,36 @@ LDA Model accuracy is:  0.8182476466328747
 NBayes Model accuracy is:  0.720130340333092
 SVM Model accuracy is:  0.7740767559739319
 
+# results using Gausian filter 
+
+Training Duration: 0:02:52.249330
+Prediction Duration: 0:00:07.422553
+LogisticRegression Model accuracy is:  0.7943519188993483
+Tree Model accuracy is:  0.8073859522085446
+KNN Model accuracy is:  0.8526430123099203
+LDA Model accuracy is:  0.8381607530774801
+NBayes Model accuracy is:  0.720854453294714
+SVM Model accuracy is:  0.8008689355539464
+
+# results for Median filter
+feature vector size : 768
+Training Duration: 0:02:56.470657
+Prediction Duration: 0:00:08.365496
+LogisticRegression Model accuracy is:  0.7566980448950036
+Tree Model accuracy is:  0.8044895003620565
+KNN Model accuracy is:  0.8081100651701666
+LDA Model accuracy is:  0.8167994207096307
+NBayes Model accuracy is:  0.778421433743664
+SVM Model accuracy is:  0.7548877624909486
+
+# results for erosion filter 
+
+Training Duration: 0:02:59.998434
+Prediction Duration: 0:00:08.516244
+LogisticRegression Model accuracy is:  0.8131788559015206
+Tree Model accuracy is:  0.8530050687907313
+KNN Model accuracy is:  0.8834178131788559
+LDA Model accuracy is:  0.8674873280231716
+NBayes Model accuracy is:  0.7385952208544533
+SVM Model accuracy is:  0.8222302679217958
+

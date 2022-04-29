@@ -26,7 +26,7 @@ import skimage.measure
 import random
 
 #%%
-DATADIR = "/media/patrick/E8DCFF67DCFF2E86/COVID_19_Kaggle/COVID-19_Radiography_Dataset/"
+DATADIR = "/home/muzuri/Documents/My_Final_Project/COVID-19_Radiography_Dataset"
 
 CATEGORIES = ["COVID", "Normal"]
 
@@ -54,8 +54,15 @@ def create_training_data():
                 # applying the min filter 
                 #minv = maxv.filter(ImageFilter.MinFilter(size = 9))
                 #median_f = im.filter(ImageFilter.MedianFilter(size = 9))
+                
                 blur = cv2.bilateralFilter(yi,9,75,75) 
-                im_max = np.array(blur, dtype='float32')
+                # blur = cv2.GaussianBlur(yi,(75,75),0)
+                # blur = cv2.medianBlur(yi,75)
+                kernel = np.ones((5,5), np.uint8)
+                erosion = cv2.erode(blur, kernel, iterations=1)
+                # dilate = cv2.dilate(blur, kernel, iterations=1)
+                # opening = cv2.morphologyEx(blur, cv2.MORPH_OPEN, kernel)
+                im_max = np.array(erosion, dtype='float32')
                 L = a*(im_max+t)
                 ill = np.array(L, dtype='uint8')#illumination estimation
                 #LBP of Ill
