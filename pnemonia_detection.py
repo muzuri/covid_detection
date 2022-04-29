@@ -24,9 +24,9 @@ import skimage.measure
 import random
 
 #%%
-DATADIR = "/home/muzuri/Documents/My_final_Project/archive/chest_xray/train"
+DATADIR = "/home/muzuri/Documents/My_final_Project/dataset/COVID-19_Radiography_Dataset"
 
-CATEGORIES = ["PNEUMONIA", "NORMAL"]
+CATEGORIES = ["Viral_Pneumonia", "Normal"]
 
 training_data = []
 

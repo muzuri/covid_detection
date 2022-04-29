@@ -1,0 +1,11 @@
+# Pneumonia results
+
+feature vector size : 768
+Training Duration: 0:00:12.113653
+Prediction Duration: 0:00:00.665597
+LogisticRegression Model accuracy is:  0.7595785440613027
+Tree Model accuracy is:  0.9386973180076629
+KNN Model accuracy is:  0.9080459770114943
+LDA Model accuracy is:  0.9703065134099617
+NBayes Model accuracy is:  0.8639846743295019
+SVM Model accuracy is:  0.7519157088122606

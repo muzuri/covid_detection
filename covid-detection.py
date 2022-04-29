@@ -26,9 +26,9 @@ import skimage.measure
 import random
 
 #%%
-DATADIR = "/home/muzuri/Documents/My_Final_Project/COVID-19_Radiography_Dataset"
+DATADIR = "/home/muzuri/Documents/My_final_Project/dataset/COVID-19_Radiography_Dataset"
 
-CATEGORIES = ["COVID", "Normal"]
+CATEGORIES = ["COVID/images", "Normal/images"]
 
 training_data = []
 
@@ -44,7 +44,9 @@ def create_training_data():
                 # convert the image to ycbcr
                 #y is luma: intensity infos
                 #cbcr : chroma : color infos
-                image = cv2.cvtColor(img_array, cv2.COLOR_BGR2YCR_CB)
+                color_Map = cv2.applyColorMap(img_array, cv2.COLORMAP_BONE)
+
+                image = cv2.cvtColor(color_Map, cv2.COLOR_BGR2YCR_CB)
                 yi,cr,cb = cv2.split(image)
                 a= 1.1 #where a is a constant slightly larger than 1, used to avoid the resulting image being too bright
                 t = 0.05 #a small positive number used to avoid being divided by zero 
@@ -55,14 +57,15 @@ def create_training_data():
                 #minv = maxv.filter(ImageFilter.MinFilter(size = 9))
                 #median_f = im.filter(ImageFilter.MedianFilter(size = 9))
                 
-                blur = cv2.bilateralFilter(yi,9,75,75) 
+                #blur = cv2.bilateralFilter(yi,9,75,75) 
                 # blur = cv2.GaussianBlur(yi,(75,75),0)
                 # blur = cv2.medianBlur(yi,75)
+                
                 kernel = np.ones((5,5), np.uint8)
-                erosion = cv2.erode(blur, kernel, iterations=1)
-                # dilate = cv2.dilate(blur, kernel, iterations=1)
+                # erosion = cv2.erode(yi, kernel, iterations=1)
+                dilate = cv2.dilate(yi, kernel, iterations=1)
                 # opening = cv2.morphologyEx(blur, cv2.MORPH_OPEN, kernel)
-                im_max = np.array(erosion, dtype='float32')
+                im_max = np.array(dilate, dtype='float32')
                 L = a*(im_max+t)
                 ill = np.array(L, dtype='uint8')#illumination estimation
                 #LBP of Ill
@@ -171,6 +174,17 @@ svm_pred = svm.predict(X_test)
 pred_end = datetime.now()
 print('Prediction Duration: {}'.format(pred_end- pred_start))
 
+# use confusion matrix for each type of model
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+
+tree_cf_matrix = confusion_matrix(y_test, tree_pred)
+knn_cf_matrix = confusion_matrix(y_test, knn_pred)
+lr_cf_matrix= confusion_matrix(y_test, lr_pred)
+lda_cf_matrix = confusion_matrix(y_test, lda_pred)
+nbayes_cf_matrix =confusion_matrix(y_test, n_bayes_pred)
+svm_cf_matrix = confusion_matrix(y_test, svm_pred)
+sns.heatmap(tree_cf_matrix, annot=True)
 # calculate accuracy
 lr_accuracy = accuracy_score(y_test, lr_pred)
 tree_accuracy = accuracy_score(y_test, tree_pred)

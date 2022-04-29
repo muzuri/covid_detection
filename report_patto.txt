@@ -74,3 +74,32 @@ LDA Model accuracy is:  0.8674873280231716
 NBayes Model accuracy is:  0.7385952208544533
 SVM Model accuracy is:  0.8222302679217958
 
+# results for dilate 
+Training Duration: 0:01:58.103510
+Prediction Duration: 0:00:05.662309
+LogisticRegression Model accuracy is:  0.7907313540912382
+Tree Model accuracy is:  0.8721940622737147
+KNN Model accuracy is:  0.8812454742939899
+LDA Model accuracy is:  0.8522809558291093
+NBayes Model accuracy is:  0.7280955829109341
+SVM Model accuracy is:  0.8084721216509776
+
+# results for applyColor Map(COLORMAP_JET) on the images with dilate filter
+Training Duration: 0:01:53.484294
+Prediction Duration: 0:00:04.627045
+LogisticRegression Model accuracy is:  0.8410572049239682
+Tree Model accuracy is:  0.8899348298334541
+KNN Model accuracy is:  0.9163649529326575
+LDA Model accuracy is:  0.9246922519913107
+NBayes Model accuracy is:  0.7986965966690803
+SVM Model accuracy is:  0.8548153511947864
+
+# results for applyColor Map(COLORMAP_BONE) on the images with the dilate filter
+Training Duration: 0:01:48.226361
+Prediction Duration: 0:00:05.671896
+LogisticRegression Model accuracy is:  0.8081100651701666
+Tree Model accuracy is:  0.8845039826212889
+KNN Model accuracy is:  0.9134685010861694
+LDA Model accuracy is:  0.9076755973931934
+NBayes Model accuracy is:  0.7291817523533671
+SVM Model accuracy is:  0.8236784938450398
