@@ -15,3 +15,8 @@ e.g: heart and lung having almost the same density i.e contrast is very low.
 5. Pteural effusion : Liguid is Lungs Cavity. Normally there are no liquid in lungs.
 6. Not seeing Lungs edges , Normal edges should be clear and sharp.
 7. Abscess: Mass(space occupying region) or cavitations.
+
+I. Consolidation:
+1. Ill defined opacity.
+2. Air bronchogram in normal state should not be visible Through the lungs but with pneumonia you can see it.
+2. Positive Silhouette Sign(Inability to differentiate closed Structures).

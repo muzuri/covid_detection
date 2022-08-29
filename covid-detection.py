@@ -16,6 +16,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import keras
 #%%
 import cv2
 from tqdm import tqdm
@@ -26,7 +27,7 @@ import skimage.measure
 import random
 
 #%%
-DATADIR = "/home/muzuri/Documents/My_final_Project/dataset/COVID-19_Radiography_Dataset"
+DATADIR = "/home/muzuri/Desktop/My_final_Project/dataset/COVID-19_Radiography_Dataset"
 
 CATEGORIES = ["COVID/images", "Normal/images"]
 
@@ -135,6 +136,75 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
+#import libraries for implementing neural networks
+
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import SGD
+from keras.regularizers import l2
+from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Flatten, Dense
+
+# Construct a Convolutional Neural Network
+
+# Step 1: Set the stride size
+stride_size = (2, 2)
+
+# Step 2: Set the pool size
+pool_size = (2, 2)
+# Step 1: Choose settings for the neural network
+
+Hidden = 10 # number of hidden nodes
+# input_dim = X_train.shape[1] # input dimension
+reg = l2(0.01) # change the strength of the regularizer
+
+# Step 2: Create neural network
+model = Sequential()
+# model.add(Dense(H, input_dim=input_dim, activation='tanh', kernel_regularizer=reg, bias_regularizer=reg)) # input layer
+# model.add(Dense(H, activation='tanh', kernel_regularizer=reg, bias_regularizer=reg)) # hidden layer 1
+# model.add(Dense(1, activation='sigmoid', kernel_regularizer=reg, bias_regularizer=reg)) # output layer
+
+
+# Step 4: add a convolutional layer 
+# First convolutional layer
+model.add(
+    Conv2D(Hidden, kernel_size=2, padding='same', activation='relu',
+           input_shape=(X_train.shape[-2], X_train.shape[-1], 1),
+))
+
+
+# second convolutional layer 
+model.add(
+    Conv2D(Hidden, kernel_size=3, padding='same', activation='relu',
+           input_shape=(X_train.shape[-2], X_train.shape[-1], 1),
+))
+
+# Step 5: add a max pooling layer
+model.add(MaxPooling2D(pool_size=pool_size, strides=stride_size))
+
+# Step 6: flatten
+model.add(Flatten())
+
+# Step 7: add a dense layer
+
+model.add(Dense(60, activation='tanh', kernel_regularizer= l2(0.0001,0.001)))
+
+# Step 8: use sigmoid activation to output a probability
+model.add(Dense(1, activation='sigmoid'))
+
+# Step 8: select the learning rate
+lr = 0.0007
+
+# Step 10: Compile model 
+model.compile(optimizer=SGD(lr=lr),
+                  loss='binary_crossentropy',
+                  metrics=['accuracy'])
+
+# # Step 3: Configure the model
+# learning_rate = 0.001
+# sgd = SGD(lr=learning_rate)
+# model.compile(optimizer=sgd, loss='binary_crossentropy')
+
 training_start = datetime.now()
 # define support vector classifiers
 lr = LogisticRegression()
@@ -151,6 +221,7 @@ knn.fit(X_train, y_train)
 lda.fit(X_train, y_train)
 n_bayes.fit(X_train, y_train)
 svm.fit(X_train, y_train)
+cnn = model.fit(X_train, y_train, batch_size=20, epochs=200, verbose=0)
 
 training_end = datetime.now()
 print('Training Duration: {}'.format(training_end - training_start))
@@ -170,6 +241,7 @@ knn_pred = knn.predict(X_test)
 lda_pred = lda.predict(X_test)
 n_bayes_pred = n_bayes.predict(X_test)
 svm_pred = svm.predict(X_test)
+cnn_pred = cnn.predict(X_test)
 
 pred_end = datetime.now()
 print('Prediction Duration: {}'.format(pred_end- pred_start))
@@ -184,6 +256,7 @@ lr_cf_matrix= confusion_matrix(y_test, lr_pred)
 lda_cf_matrix = confusion_matrix(y_test, lda_pred)
 nbayes_cf_matrix =confusion_matrix(y_test, n_bayes_pred)
 svm_cf_matrix = confusion_matrix(y_test, svm_pred)
+cnn_cf_matrix = confusion_matrix(y_test, cnn_pred)
 sns.heatmap(tree_cf_matrix, annot=True)
 # calculate accuracy
 lr_accuracy = accuracy_score(y_test, lr_pred)
@@ -192,6 +265,7 @@ knn_accuracy = accuracy_score(y_test, knn_pred)
 lda_accuracy = accuracy_score(y_test, lda_pred)
 n_bayes_accuracy = accuracy_score(y_test, n_bayes_pred)
 svm_accuracy = accuracy_score(y_test, svm_pred)
+cnn_accuracy = accuracy_score(y_test,cnn_pred)
 
 
 print('LogisticRegression Model accuracy is: ', lr_accuracy)
@@ -200,6 +274,7 @@ print('KNN Model accuracy is: ', knn_accuracy)
 print('LDA Model accuracy is: ', lda_accuracy)
 print('NBayes Model accuracy is: ', n_bayes_accuracy)
 print('SVM Model accuracy is: ', svm_accuracy)
+print('CNN Model accuracy is: ', cnn_accuracy)
 #%%
 #1. ROC curve + AUC
 # generate predictions
@@ -209,6 +284,7 @@ knn_pred = knn.predict_proba(X_test)
 lda_pred = lda.predict_proba(X_test)
 n_bayes_pred = n_bayes.predict_proba(X_test)
 svm_pred = svm.predict_proba(X_test)
+cnn_pred = cnn.predict_log_proba(X_test)
 
 
 # select the probabilities for label 1.0
